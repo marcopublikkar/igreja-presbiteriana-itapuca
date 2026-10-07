@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Publicar mensagens | Igreja Presbiteriana de Itapuca</title>
+  <link rel="icon" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/formulario.css">
+  <script defer src="/assets/js/formulario.js"></script>
+</head>
+<body>
+  <header><div class="container header-inner"><a class="brand" href="/"><img src="/assets/images/marca.png" width="450" height="150" alt="Igreja Presbiteriana de Itapuca"></a><a href="/blog/">Ver o blog</a></div></header>
+  <main class="form-page container">
+    <div class="form-heading"><span class="eyebrow">Área de publicações</span><h1>Mensagens da igreja</h1><p>Escreva, publique e corrija seus artigos em um só lugar.</p></div>
+    <p id="notice" role="status" aria-live="polite" hidden></p>
+    <section id="login-panel" class="panel" aria-labelledby="login-title">
+      <h2 id="login-title">Entrar</h2>
+      <p>Use seu usuário e sua senha de autor.</p>
+      <form id="login-form">
+        <label>Usuário<input name="username" autocomplete="username" required minlength="3"></label>
+        <label>Senha<input name="password" type="password" autocomplete="current-password" required></label>
+        <button class="btn" type="submit">Entrar</button>
+      </form>
+    </section>
+    <div id="dashboard" hidden>
+      <div class="dashboard-bar"><span id="welcome-user"></span><button id="logout" type="button">Sair</button></div>
+      <div class="dashboard-grid">
+        <section class="panel" aria-labelledby="editor-title">
+          <h2 id="editor-title">Novo artigo</h2>
+          <p>O artigo será publicado logo após você clicar em “Publicar”.</p>
+          <form id="post-form">
+            <label>Título<input name="title" id="post-title" required minlength="5" maxlength="160" placeholder="Ex.: A esperança que permanece"></label>
+            <label>Resumo curto<textarea name="summary" required minlength="15" maxlength="350" rows="3" placeholder="Uma frase ou duas para apresentar o artigo no blog."></textarea></label>
+            <label>Tema<select name="category"><option>Reflexões</option><option>Vida cristã</option><option>Fé e esperança</option><option>Oração</option><option>Graça</option><option>Comunhão</option><option>Missões</option></select></label>
+            <label>Texto do artigo<textarea name="body" id="post-body" required minlength="80" rows="16" placeholder="Cole aqui o texto. O site organiza parágrafos longos sem mudar suas palavras."></textarea></label>
+            <div class="review-help"><p>O site separa parágrafos longos na leitura. Para um subtítulo, comece a linha com <strong>## </strong>. Para uma lista, comece cada item com <strong>- </strong>. O texto não é reescrito.</p><button type="button" id="insert-heading" class="quiet-button">Inserir subtítulo</button> <button type="button" id="insert-bullet" class="quiet-button">Inserir item de lista</button> <button type="button" id="preview-text" class="quiet-button">Ver prévia do texto</button></div>
+            <div id="text-preview" class="prose text-preview" hidden></div>
+            <div class="image-help"><h3>Imagem de capa</h3><p>Gere uma imagem no ChatGPT, salve-a e selecione o arquivo aqui. O formulário reduz e converte para WebP automaticamente.</p><button type="button" id="copy-prompt" class="quiet-button">Copiar instrução para gerar a imagem</button></div>
+            <label>Selecionar imagem <span id="image-required">(obrigatória)</span><input name="image" type="file" accept="image/png,image/jpeg,image/webp" required></label>
+            <p id="image-info" class="fineprint">Formatos aceitos: PNG, JPG ou WebP. O envio final terá no máximo 1.600 px de largura.</p>
+            <img id="image-preview" alt="Prévia da imagem escolhida" hidden>
+            <div class="editor-actions"><button class="btn" id="save-button" type="submit">Publicar artigo</button><button type="button" id="cancel-edit" class="quiet-button" hidden>Cancelar edição</button></div>
+          </form>
+        </section>
+        <section class="panel" aria-labelledby="list-title"><h2 id="list-title">Seus artigos</h2><p>Você pode editar, tirar do ar, restaurar ou mover para a lixeira.</p><div id="post-list" class="post-list">Carregando…</div></section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

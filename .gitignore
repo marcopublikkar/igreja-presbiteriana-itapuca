@@ -1,5 +1,6 @@
 .wrangler/
 .dev.vars
 node_modules/
+.gh-config/
 user-*.sql
 *.zip

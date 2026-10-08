@@ -179,10 +179,11 @@ $('#copy-prompt').addEventListener('click', async () => {
 
 $('#login-form').addEventListener('submit', async event => {
   event.preventDefault();
-  const form = new FormData(event.currentTarget);
+  const loginForm = event.currentTarget;
+  const form = new FormData(loginForm);
   try {
     const { user } = await api('/api/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(form)) });
-    event.currentTarget.reset(); setLoggedIn(user); message(`Bem-vindo, ${user.username}.`);
+    loginForm.reset(); setLoggedIn(user); message(`Bem-vindo, ${user.username}.`);
   } catch (error) { message(error.message, true); }
 });
 

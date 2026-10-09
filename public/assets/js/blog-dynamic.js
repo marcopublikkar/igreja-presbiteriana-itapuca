@@ -17,7 +17,8 @@ fetch('/api/posts').then(response => response.ok ? response.json() : Promise.rej
     meta.append(category, date);
     const title = document.createElement('h3'); const titleLink = document.createElement('a'); titleLink.href = post.url; titleLink.textContent = post.title; title.append(titleLink);
     const summary = document.createElement('p'); summary.textContent = post.summary;
-    body.append(meta, title, summary); article.append(imageLink, body); grid.prepend(article);
+    const more = document.createElement('a'); more.className = 'text-link'; more.href = post.url; more.textContent = 'Leia mais';
+    body.append(meta, title, summary, more); article.append(imageLink, body); grid.prepend(article);
   }
   document.querySelector('#search').dispatchEvent(new Event('input'));
 }).catch(() => {});

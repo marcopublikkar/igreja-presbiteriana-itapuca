@@ -15,7 +15,8 @@ fetch('/api/posts').then(response => response.ok ? response.json() : Promise.rej
     meta.append(category, date);
     const title = document.createElement('h3'); const titleLink = document.createElement('a'); titleLink.href = post.url; titleLink.textContent = post.title; title.append(titleLink);
     const summary = document.createElement('p'); summary.textContent = post.summary;
-    body.append(meta, title, summary); card.append(imageLink, body); grid.prepend(card);
+    const more = document.createElement('a'); more.className = 'text-link'; more.href = post.url; more.textContent = 'Leia mais';
+    body.append(meta, title, summary, more); card.append(imageLink, body); grid.prepend(card);
   }
   while (grid.children.length > 3) grid.lastElementChild.remove();
 }).catch(() => {});

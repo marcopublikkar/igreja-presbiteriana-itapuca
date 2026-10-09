@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS posts (
   summary TEXT NOT NULL,
   body TEXT NOT NULL,
   category TEXT NOT NULL DEFAULT 'Reflexões',
+  display_author TEXT NOT NULL DEFAULT 'Rev. Elton de Campos',
   image_key TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'published' CHECK (status IN ('published','draft','trashed')),
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -40,6 +41,7 @@ CREATE TABLE IF NOT EXISTS post_revisions (
   summary TEXT NOT NULL,
   body TEXT NOT NULL,
   category TEXT NOT NULL,
+  display_author TEXT NOT NULL DEFAULT 'Rev. Elton de Campos',
   image_key TEXT NOT NULL,
   status TEXT NOT NULL,
   saved_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP

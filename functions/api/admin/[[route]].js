@@ -11,18 +11,18 @@ export async function onRequest({ request, env }) {
   if (request.method !== 'GET' && !sameOrigin(request)) return json({ error: 'Origem não autorizada.' }, 403);
   if (segments.length === 1 && request.method === 'GET') {
     const results = user.role === 'admin'
-      ? await db.prepare('SELECT posts.id,slug,title,summary,category,image_key,status,updated_at,published_at,users.username AS author FROM posts JOIN users ON users.id=posts.author_id ORDER BY updated_at DESC').all()
-      : await db.prepare('SELECT posts.id,slug,title,summary,category,image_key,status,updated_at,published_at,users.username AS author FROM posts JOIN users ON users.id=posts.author_id WHERE posts.author_id=? ORDER BY updated_at DESC').bind(user.id).all();
+      ? await db.prepare('SELECT posts.id,slug,title,summary,category,display_author,image_key,status,updated_at,published_at,users.username AS author FROM posts JOIN users ON users.id=posts.author_id ORDER BY updated_at DESC').all()
+      : await db.prepare('SELECT posts.id,slug,title,summary,category,display_author,image_key,status,updated_at,published_at,users.username AS author FROM posts JOIN users ON users.id=posts.author_id WHERE posts.author_id=? ORDER BY updated_at DESC').bind(user.id).all();
     return json({ posts: results.results.map(post => ({ ...post, imageUrl: imageUrl(post.image_key) })) });
   }
   if (segments.length === 1 && request.method === 'POST') {
     if (Number(request.headers.get('content-length') || 0) > 6 * 1024 * 1024) return json({ error: 'Arquivo muito grande.' }, 413);
     try {
       const data = validatePost(await request.formData(), true);
-      const key = await storeImage(data.image, env.IMAGES);
+      const key = await storeImage(data.image, env.IMAGES, data.title);
       const slug = `${slugify(data.title)}-${crypto.randomUUID().slice(0, 8)}`;
-      const inserted = await db.prepare('INSERT INTO posts (slug,author_id,title,summary,body,category,image_key) VALUES (?,?,?,?,?,?,?)')
-        .bind(slug, user.id, data.title, data.summary, data.body, data.category, key).run();
+      const inserted = await db.prepare('INSERT INTO posts (slug,author_id,title,summary,body,category,display_author,image_key) VALUES (?,?,?,?,?,?,?,?)')
+        .bind(slug, user.id, data.title, data.summary, data.body, data.category, data.displayAuthor, key).run();
       return json({ id: inserted.meta.last_row_id, url: `/blog/artigos/${slug}` }, 201);
     } catch (error) { return json({ error: error.message || 'Não foi possível publicar.' }, 400); }
   }
@@ -38,10 +38,10 @@ export async function onRequest({ request, env }) {
       const data = validatePost(form);
       const requestedStatus = String(form.get('status') || post.status);
       if (!['published','draft','trashed'].includes(requestedStatus)) throw new Error('Situação inválida.');
-      const key = data.image ? await storeImage(data.image, env.IMAGES) : post.image_key;
+      const key = data.image ? await storeImage(data.image, env.IMAGES, data.title) : post.image_key;
       await saveRevision(db, post, user.id);
-      await db.prepare('UPDATE posts SET title=?,summary=?,body=?,category=?,image_key=?,status=?,updated_at=CURRENT_TIMESTAMP,published_at=CASE WHEN ?=\'published\' AND status<>\'published\' THEN CURRENT_TIMESTAMP ELSE published_at END WHERE id=?')
-        .bind(data.title, data.summary, data.body, data.category, key, requestedStatus, requestedStatus, id).run();
+      await db.prepare('UPDATE posts SET title=?,summary=?,body=?,category=?,display_author=?,image_key=?,status=?,updated_at=CURRENT_TIMESTAMP,published_at=CASE WHEN ?=\'published\' AND status<>\'published\' THEN CURRENT_TIMESTAMP ELSE published_at END WHERE id=?')
+        .bind(data.title, data.summary, data.body, data.category, data.displayAuthor, key, requestedStatus, requestedStatus, id).run();
       return json({ ok: true, url: `/blog/artigos/${post.slug}` });
     } catch (error) { return json({ error: error.message || 'Não foi possível salvar.' }, 400); }
   }
@@ -55,8 +55,17 @@ export async function onRequest({ request, env }) {
     const revision = await db.prepare('SELECT * FROM post_revisions WHERE id=? AND post_id=?').bind(revisionId, id).first();
     if (!revision) return json({ error: 'Versão não encontrada.' }, 404);
     await saveRevision(db, post, user.id);
-    await db.prepare('UPDATE posts SET title=?,summary=?,body=?,category=?,image_key=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
-      .bind(revision.title, revision.summary, revision.body, revision.category, revision.image_key, revision.status, id).run();
+    await db.prepare('UPDATE posts SET title=?,summary=?,body=?,category=?,display_author=?,image_key=?,status=?,updated_at=CURRENT_TIMESTAMP WHERE id=?')
+      .bind(revision.title, revision.summary, revision.body, revision.category, revision.display_author || 'Rev. Elton de Campos', revision.image_key, revision.status, id).run();
+    return json({ ok: true });
+  }
+  if (segments.length === 3 && segments[2] === 'delete' && request.method === 'DELETE') {
+    if (post.status !== 'trashed') return json({ error: 'Envie o artigo para a lixeira antes de excluí-lo definitivamente.' }, 400);
+    await env.IMAGES?.delete(post.image_key);
+    await db.batch([
+      db.prepare('DELETE FROM post_revisions WHERE post_id=?').bind(id),
+      db.prepare('DELETE FROM posts WHERE id=?').bind(id)
+    ]);
     return json({ ok: true });
   }
   return json({ error: 'Rota não encontrada.' }, 404);

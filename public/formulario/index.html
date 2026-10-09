@@ -32,7 +32,7 @@
           <p>O artigo será publicado logo após você clicar em “Publicar”.</p>
           <form id="post-form">
             <label>Título<input name="title" id="post-title" required minlength="5" maxlength="160" placeholder="Ex.: A esperança que permanece"></label>
-            <label>Resumo curto<textarea name="summary" required minlength="15" maxlength="350" rows="3" placeholder="Uma frase ou duas para apresentar o artigo no blog."></textarea></label>
+            <input type="hidden" name="summary">
             <label>Tema<select name="category"><option>Reflexões</option><option>Vida cristã</option><option>Fé e esperança</option><option>Oração</option><option>Graça</option><option>Comunhão</option><option>Missões</option></select></label>
             <label>Autor da mensagem<select name="display_author" id="display-author"><option selected>Rev. Elton de Campos</option><option>Pb. Ricardo Dias</option><option value="outro">Outro autor…</option></select></label>
             <label id="custom-author-wrap" hidden>Nome do outro autor<input name="custom_author" id="custom-author" maxlength="100" placeholder="Ex.: Presbítero João Silva"></label>

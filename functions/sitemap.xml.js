@@ -10,3 +10,8 @@ export async function onRequestGet({ env, request }) {
   const extra = rows.results.map(post => `<url><loc>${origin}/blog/artigos/${post.slug}</loc><lastmod>${post.updated_at.slice(0, 10)}</lastmod></url>`).join('');
   return new Response(base.replace('</urlset>', `${extra}</urlset>`), { headers: { 'Content-Type': 'application/xml; charset=utf-8', 'Cache-Control': 'public, max-age=300' } });
 }
+
+export async function onRequestHead(context) {
+  const res = await onRequestGet(context);
+  return new Response(null, { status: res.status, headers: res.headers });
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Igreja Presbiteriana de Itapuca",
+  "short_name": "IPB Itapuca",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "browser",
+  "theme_color": "#075440",
+  "background_color": "#ffffff",
+  "icons": [
+    { "src": "/assets/images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/images/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

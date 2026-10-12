@@ -1,0 +1,42 @@
+# Páginas do antigo site (WordPress) -> páginas equivalentes do site novo
+/nossa-historia          /sobre        301
+/nossa-historia/         /sobre        301
+/agenda                  /programacao  301
+/agenda/                 /programacao  301
+/boletim                 /programacao  301
+/boletim/                /programacao  301
+/grupos-familiares       /ministerios  301
+/grupos-familiares/      /ministerios  301
+/sociedades-internas     /ministerios  301
+/sociedades-internas/    /ministerios  301
+/construcao              /contribua    301
+/construcao/             /contribua    301
+/category/*              /blog/        301
+
+# Mapas do site gerados pelo Yoast (WordPress) -> sitemap novo
+/sitemap_index.xml       /sitemap.xml  301
+/wp-sitemap.xml          /sitemap.xml  301
+/post-sitemap.xml        /sitemap.xml  301
+/page-sitemap.xml        /sitemap.xml  301
+/category-sitemap.xml    /sitemap.xml  301
+/author-sitemap.xml      /sitemap.xml  301
+
+# Artigos antigos que continuam no ar: /slug/ -> /blog/slug
+/a-cura-de-um-paralitico  /blog/a-cura-de-um-paralitico  301
+/a-cura-de-um-paralitico/  /blog/a-cura-de-um-paralitico  301
+/a-unidade-do-corpo-de-cristo-na-luta-contra-o-mal  /blog/a-unidade-do-corpo-de-cristo-na-luta-contra-o-mal  301
+/a-unidade-do-corpo-de-cristo-na-luta-contra-o-mal/  /blog/a-unidade-do-corpo-de-cristo-na-luta-contra-o-mal  301
+/amor-inseparavel  /blog/amor-inseparavel  301
+/amor-inseparavel/  /blog/amor-inseparavel  301
+/ate-que-todos-oucam  /blog/ate-que-todos-oucam  301
+/ate-que-todos-oucam/  /blog/ate-que-todos-oucam  301
+/celebrando-a-unidade-no-corpo-de-cristo-2  /blog/celebrando-a-unidade-no-corpo-de-cristo-2  301
+/celebrando-a-unidade-no-corpo-de-cristo-2/  /blog/celebrando-a-unidade-no-corpo-de-cristo-2  301
+/descanso-em-deus  /blog/descanso-em-deus  301
+/descanso-em-deus/  /blog/descanso-em-deus  301
+/i-corintios-121-da-ignorancia-a-maturidade-espiritual  /blog/i-corintios-121-da-ignorancia-a-maturidade-espiritual  301
+/i-corintios-121-da-ignorancia-a-maturidade-espiritual/  /blog/i-corintios-121-da-ignorancia-a-maturidade-espiritual  301
+/restauracao-o-caminho-da-graca-de-deus  /blog/restauracao-o-caminho-da-graca-de-deus  301
+/restauracao-o-caminho-da-graca-de-deus/  /blog/restauracao-o-caminho-da-graca-de-deus  301
+/vencendo-o-medo-no-meio-da-tempestade  /blog/vencendo-o-medo-no-meio-da-tempestade  301
+/vencendo-o-medo-no-meio-da-tempestade/  /blog/vencendo-o-medo-no-meio-da-tempestade  301

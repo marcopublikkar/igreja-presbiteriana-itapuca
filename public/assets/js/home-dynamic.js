@@ -1,7 +1,7 @@
 'use strict';
 fetch('/api/posts').then(response => response.ok ? response.json() : Promise.reject()).then(({ posts }) => {
   if (!posts?.length) return;
-  const section = [...document.querySelectorAll('section')].find(node => node.querySelector('a[href="blog/index.html"]')?.textContent.includes('Explore o blog'));
+  const section = [...document.querySelectorAll('section')].find(node => node.querySelector('a[href="/blog/"]')?.textContent.includes('Explore o blog'));
   const grid = section?.querySelector('.three-grid');
   if (!grid) return;
   for (const post of posts.slice(0, 3).reverse()) {

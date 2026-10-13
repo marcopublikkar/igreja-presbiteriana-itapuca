@@ -9,6 +9,16 @@
   var count = document.getElementById('prayer-count');
   var status = document.getElementById('prayer-status');
 
+  // Quem chega por /oracao (link do WhatsApp) ou pelo menu cai direto no formulário,
+  // mesmo que o navegador não tenha rolado sozinho até a âncora.
+  function goToForm() {
+    if (window.location.hash !== '#pedido-de-oracao') return;
+    var section = document.getElementById('pedido-de-oracao');
+    if (section) section.scrollIntoView({ block: 'start' });
+  }
+  if (document.readyState === 'complete') setTimeout(goToForm, 150);
+  else window.addEventListener('load', function () { setTimeout(goToForm, 150); });
+
   function updateCount() { count.textContent = request.value.length + ' / ' + request.maxLength; }
   function updateAnon() {
     name.disabled = anon.checked;

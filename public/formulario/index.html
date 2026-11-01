@@ -20,7 +20,7 @@
       <p>Use seu usuário e sua senha de autor.</p>
       <form id="login-form">
         <label>Usuário<input name="username" autocomplete="username" required minlength="3"></label>
-        <label>Senha<input name="password" type="password" autocomplete="current-password" required></label>
+        <label>Senha<span class="pw-wrap"><input name="password" type="password" autocomplete="current-password" required><button type="button" class="pw-toggle" aria-label="Mostrar senha" aria-pressed="false"><svg class="eye-open" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5c5.2 0 8.8 4.2 10 7-1.2 2.8-4.8 7-10 7S3.2 14.8 2 12c1.2-2.8 4.8-7 10-7Zm0 2C8.6 7 5.9 9.5 4.3 12 5.9 14.5 8.6 17 12 17s6.1-2.5 7.7-5C18.1 9.5 15.4 7 12 7Zm0 1.8a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4Z"/></svg><svg class="eye-closed" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.3 2.3 21.7 20.7l-1.4 1.4-3.2-3.2A11.5 11.5 0 0 1 12 20C6.8 20 3.2 15.8 2 13c.7-1.6 1.9-3.3 3.6-4.7L1.9 3.7l1.4-1.4ZM7 10.1c-1.2.9-2.1 2-2.7 2.9 1.6 2.5 4.3 5 7.7 5 1 0 1.9-.2 2.8-.6l-1.7-1.7a3.2 3.2 0 0 1-4.1-4.1L7 10.1ZM12 4c5.2 0 8.8 4.2 10 7-.5 1.2-1.4 2.6-2.7 3.9l-1.4-1.4c.9-.9 1.6-1.8 2-2.5C18.3 8.5 15.6 6 12 6c-.6 0-1.2.1-1.7.2L8.7 4.6C9.7 4.2 10.8 4 12 4Z"/></svg></button></span></label>
         <button class="btn" type="submit">Entrar</button>
       </form>
     </section>

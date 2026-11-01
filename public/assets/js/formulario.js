@@ -224,3 +224,17 @@ $('#logout').addEventListener('click', async () => {
 
 api('/api/auth/me').then(({ user }) => setLoggedIn(user)).catch(() => setLoggedIn(null));
 if (location.hostname === '127.0.0.1' && location.port === '4174') message('Esta é uma prévia visual. O login e a publicação funcionarão depois da conexão com a Cloudflare.');
+
+// Botão "olho": mostra ou oculta a senha no login
+(function () {
+  document.addEventListener("click", function (event) {
+    var button = event.target.closest(".pw-toggle");
+    if (!button) return;
+    var input = button.parentNode.querySelector("input");
+    var show = input.type === "password";
+    input.type = show ? "text" : "password";
+    button.setAttribute("aria-pressed", show ? "true" : "false");
+    button.setAttribute("aria-label", show ? "Ocultar senha" : "Mostrar senha");
+    input.focus();
+  });
+})();

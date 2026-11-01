@@ -1,0 +1,11 @@
+{
+  "_como_usar": "Um item por mês. 'mes' = AAAA-MM. O site mostra o tema do mês atual; se o mês ainda não tiver tema, continua o mais recente.",
+  "temas": [
+    {
+      "mes": "2026-11",
+      "titulo": "A grande colheita de almas",
+      "texto": "Não dizeis vós que ainda há quatro meses até a ceifa? Eu, porém, vos digo: erguei os olhos e vede os campos, pois já branquejam para a ceifa.",
+      "referencia": "João 4:35"
+    }
+  ]
+}
